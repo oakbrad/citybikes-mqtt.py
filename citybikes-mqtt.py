@@ -37,9 +37,11 @@ myStations = ["8302e5d11a6c84bac27a774de41474f9", \
 for station in network:
         for id in myStations:
                 if id == station['id']:
+                        percentFull = int(((station['free_bikes']/float((station['free_bikes'] + station['empty_slots'])))*100))
                         topic = "CityBikes/" + station['name']
                         payload = json.dumps({  'free_bikes':station['free_bikes'], \
                                                 'empty_slots':station['empty_slots'], \
+                                                'percent_full':percentFull, \
                                                 'lat':station['latitude'], \
                                                 'lon':station['longitude'], \
                                                 'last_updated':datetime.fromtimestamp(station['extra']['last_updated']).strftime('%Y-%m-%d %H:%M')})
